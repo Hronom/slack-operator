@@ -30,6 +30,9 @@ import java.util.Map;
 public class StandardMessageRunner implements ApplicationRunner {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    private static final String APP_SORTED_MARKDOWN_SECTION_PREFIX = "APP_SORTED_MARKDOWN_SECTION_";
+    private static final String APP_MARKDOWN_SECTION_PREFIX = "APP_MARKDOWN_SECTION_";
+
     private final ApplicationProperties applicationProperties;
     private final Slack slack;
 
@@ -48,7 +51,7 @@ public class StandardMessageRunner implements ApplicationRunner {
 
         Map<String, String> env = System.getenv();
         for (int i = 0; i < 50; i++) {
-            String envName = "APP_SORTED_MARKDOWN_SECTION_" + i;
+            String envName = APP_SORTED_MARKDOWN_SECTION_PREFIX + i;
             String envValue = env.get(envName);
             if (StringUtils.hasText(envValue)) {
                 LOGGER.info("Processing {}. Value: '{}'...", envName, envValue);
@@ -67,7 +70,7 @@ public class StandardMessageRunner implements ApplicationRunner {
             }
         }
         for (String envName : env.keySet()) {
-            if (envName.startsWith("APP_MARKDOWN_SECTION_")) {
+            if (envName.startsWith(APP_MARKDOWN_SECTION_PREFIX)) {
                 String envValue = env.get(envName);
                 LOGGER.info("Processing {}. Value: '{}'...", envName, envValue);
                 blocks.add(
