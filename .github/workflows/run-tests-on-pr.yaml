@@ -1,4 +1,4 @@
-name: run tests on pr
+name: Run tests on PR
 
 on:
   workflow_dispatch:
