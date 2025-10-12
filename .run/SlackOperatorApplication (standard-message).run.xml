@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SlackOperatorApplication (standard-message)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="standard-message" />
+    <option name="envFilePaths">
+      <option value="$PROJECT_DIR$/.env" />
+    </option>
+    <module name="slack-operator" />
+    <selectedOptions>
+      <option name="environmentVariables" />
+    </selectedOptions>
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.github.hronom.slack_operator.SlackOperatorApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
