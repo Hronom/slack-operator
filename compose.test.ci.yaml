@@ -1,5 +1,6 @@
 name: hronom-slack-operator
 
+# Inspired by https://java.testcontainers.org/supported_docker_environment/continuous_integration/dind_patterns/#docker-compose-example
 services:
   slack-operator-test:
     container_name: slack-operator-test
