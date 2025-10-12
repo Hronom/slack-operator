@@ -22,8 +22,8 @@ import java.util.Map;
 
 /**
  * Inspired by:
- * * https://slack.dev/java-slack-sdk/guides/web-api-basics
- * * https://github.com/slackapi/java-slack-sdk
+ * * <a href="https://slack.dev/java-slack-sdk/guides/web-api-basics">Using the Web API</a>
+ * * <a href="https://github.com/slackapi/java-slack-sdk">java-slack-sdk</a>
  */
 @Service
 @Profile("standard-message")
