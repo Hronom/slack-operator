@@ -48,7 +48,7 @@ public class StandardMessageRunner implements ApplicationRunner {
 
         Map<String, String> env = System.getenv();
         for (int i = 0; i < 50; i++) {
-            String envName = "SORTED_MARKDOWN_SECTION_" + i;
+            String envName = "APP_SORTED_MARKDOWN_SECTION_" + i;
             String envValue = env.get(envName);
             if (StringUtils.hasText(envValue)) {
                 LOGGER.info("Processing {}. Value: '{}'...", envName, envValue);
@@ -67,7 +67,7 @@ public class StandardMessageRunner implements ApplicationRunner {
             }
         }
         for (String envName : env.keySet()) {
-            if (envName.startsWith("MARKDOWN_SECTION_")) {
+            if (envName.startsWith("APP_MARKDOWN_SECTION_")) {
                 String envValue = env.get(envName);
                 LOGGER.info("Processing {}. Value: '{}'...", envName, envValue);
                 blocks.add(
