@@ -1,12 +1,12 @@
 package com.github.hronom.slack_operator.runner;
 
+import com.github.hronom.slack_operator.properties.ApplicationProperties;
 import com.slack.api.Slack;
 import com.slack.api.methods.response.chat.ChatPostMessageResponse;
 import com.slack.api.model.block.DividerBlock;
 import com.slack.api.model.block.LayoutBlock;
 import com.slack.api.model.block.SectionBlock;
 import com.slack.api.model.block.composition.MarkdownTextObject;
-import com.github.hronom.slack_operator.properties.ApplicationProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -85,11 +85,11 @@ public class StandardMessageRunner implements ApplicationRunner {
             }
         }
 
-        LOGGER.info("Sending message to slack channel '{}'...", applicationProperties.getSlackChannel());
+        LOGGER.info("Sending message to slack channel '{}'...", applicationProperties.slackChannel());
         ChatPostMessageResponse response = slack
-                .methods(applicationProperties.getSlackToken())
+                .methods(applicationProperties.slackToken())
                 .chatPostMessage(req -> req
-                        .channel(applicationProperties.getSlackChannel())
+                        .channel(applicationProperties.slackChannel())
                         .blocks(blocks)
                 );
         if (response.isOk()) {

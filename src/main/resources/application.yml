@@ -1,5 +1,6 @@
 app:
-  slackChannel: "test"
+  slackChannel: ${APP_SLACK_CHANNEL:test}
+  slackToken: ${APP_SLACK_TOKEN:secret}
 
 spring:
   main:
