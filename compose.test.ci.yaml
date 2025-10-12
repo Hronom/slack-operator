@@ -1,0 +1,22 @@
+name: hronom-slack-operator
+
+services:
+  slack-operator-test:
+    container_name: slack-operator-test
+    image: maven:3.9-eclipse-temurin-25-alpine
+    stop_signal: SIGKILL
+    stdin_open: true
+    tty: true
+    working_dir: $PWD
+    environment:
+      APP_SLACK_CHANNEL: test
+      APP_SLACK_TOKEN: secret
+      SPRING_PROFILES_ACTIVE: standard-message
+      SORTED_MARKDOWN_SECTION_1: "Test message: `It's a test`"
+      SORTED_MARKDOWN_SECTION_2: "Second test message: `It's a test`"
+    volumes:
+      - $PWD:$PWD
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Maven cache (optional)
+      - ~/.m2:/root/.m2
+    command: mvn test integration-test --batch-mode
