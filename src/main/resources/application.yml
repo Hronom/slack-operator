@@ -1,0 +1,6 @@
+app:
+  slackChannel: "test"
+
+spring:
+  main:
+    banner-mode: off

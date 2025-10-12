@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.logging.logback-extensions.profile-specific -->
+<!-- With fixes inspired by https://github.com/spring-projects/spring-boot/issues/37432#issuecomment-1722417503 -->
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProfile name="!(json-logs)">
+        <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="json-logs">
+        <appender name="CONSOLE_JSON" class="ch.qos.logback.core.ConsoleAppender">
+            <!-- Doc: https://github.com/logfellow/logstash-logback-encoder?tab=readme-ov-file#composite-encoderlayout -->
+            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <!-- Fields https://github.com/logfellow/logstash-logback-encoder?tab=readme-ov-file#providers-common-to-loggingevents-and-accessevents -->
+                    <logLevel>
+                        <fieldName>level</fieldName>
+                    </logLevel>
+                    <timestamp>
+                        <fieldName>timestamp</fieldName>
+                        <pattern>[UNIX_TIMESTAMP_AS_NUMBER]</pattern>
+                    </timestamp>
+                    <nestedField>
+                        <fieldName>message</fieldName>
+                        <providers>
+                            <loggerName>
+                                <fieldName>logger_name</fieldName>
+                            </loggerName>
+                            <message>
+                                <fieldName>text</fieldName>
+                            </message>
+                            <stackTrace>
+                                <fieldName>stack_trace</fieldName>
+                                <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+                                    <maxDepthPerThrowable>30</maxDepthPerThrowable>
+                                    <maxLength>2048</maxLength>
+                                    <shortenedClassNameLength>20</shortenedClassNameLength>
+                                    <exclude>^sun\.reflect\..*\.invoke</exclude>
+                                    <exclude>^net\.sf\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+                                    <rootCauseFirst>true</rootCauseFirst>
+                                </throwableConverter>
+                            </stackTrace>
+                            <mdc>
+                                <includeMdcKeyName>trace_id</includeMdcKeyName>
+                            </mdc>
+                        </providers>
+                    </nestedField>
+                </providers>
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE_JSON"/>
+        </root>
+    </springProfile>
+</configuration>

@@ -1,0 +1,8 @@
+services:
+  slack-operator:
+    container_name: slack-operator
+    env_file: .env
+    build:
+      context: .
+      target: application
+    user: "1001:1001"
