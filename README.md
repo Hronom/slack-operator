@@ -3,6 +3,7 @@
   * [Running in docker](#running-in-docker)
   * [Run tests like in CI/CD:](#run-tests-like-in-cicd)
   * [Usage:](#usage)
+* [Misc](#misc)
 <!-- TOC -->
 
 # slack-operator
@@ -33,3 +34,7 @@ APP_SLACK_TOKEN=change
 APP_SORTED_MARKDOWN_SECTION_1="Test message: `It's a test`"
 APP_SORTED_MARKDOWN_SECTION_2="Second test message: `It's a test`"
 ```
+
+# Misc
+
+1
